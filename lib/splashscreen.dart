@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:islamic_tube/screens/GetStarted.dart';
@@ -22,28 +21,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 182, 221, 113),
-      body: Stack(
+    return Stack(
         children: [
           Container(
-            width: double.infinity,
-            height: double.infinity,
+            
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color(0xff70fc55),
-                  Color(0xff4cfc8a),
-                  Color(0xfffcfc36),
-                  Color(0xfffcfc35),
-                ],
-              ),
+            image: DecorationImage(image: AssetImage('assets/splash.png'),fit: BoxFit.fill)
             ),
             child: Align(
               alignment: Alignment.center,
-              child: Image.asset('assets/logo1.png',scale: 2.3,),
+              child: Image.asset(
+                'assets/IslamicV.png',scale: 5       
+              ),
             ),
           ),
           Padding(
@@ -54,9 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
         ],
-      ),
+      
     );
   }
 }
-
-

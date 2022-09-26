@@ -10,15 +10,25 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+
+  List<IconData> Icondata = [
+    Icons.cast_sharp,
+    Icons.notifications,
+    Icons.search,
+    Icons.account_circle,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Islamic"),
-      ),
-      body: Center(
-        child: Image.asset('assets/logo1.png',scale: 2.3,),
-      )
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        leading: Image.asset('assets/Logo.png',scale: 1,),
+        
+        actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
+   ),
+
     );
   }
 }

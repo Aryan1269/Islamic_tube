@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_tube/home.dart';
+
+import 'package:islamic_tube/home_screens.dart';
 import 'CustomAppBar.dart';
 
 class GetStarted extends StatefulWidget {
@@ -92,7 +93,7 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => home()));
+                        MaterialPageRoute(builder: (_) => Home_screen()));
                   },
                   icon: Text(
                     'GET STARTED',

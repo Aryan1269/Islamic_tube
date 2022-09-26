@@ -17,8 +17,13 @@ class _MergedState extends State<Merged> {
   Widget build(BuildContext context) {
 
    return MaterialApp(
+    theme: ThemeData(
+      brightness: Brightness.light,
+    ),
     debugShowCheckedModeBanner: false,
-    home: SplashScreen(),
+    home: Scaffold(
+      body: SplashScreen(),
+    ),
   );
     
   }
