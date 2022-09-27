@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_tube/home_screens.dart';
+import 'package:islamic_tube/screens/GetStarted.dart';
+import 'package:islamic_tube/screens/Register.dart';
 import 'package:islamic_tube/splashscreen.dart';
+import 'package:islamic_tube/screens/sigin.dart';
+
+import 'home.dart';
 
 void main() {
   runApp(Merged());
@@ -21,9 +27,13 @@ class _MergedState extends State<Merged> {
       brightness: Brightness.light,
     ),
     debugShowCheckedModeBanner: false,
-    home: Scaffold(
-      body: SplashScreen(),
-    ),
+   routes: {
+        "/": (context) => SplashScreen(),
+        "/getstarted": (context) => const GetStarted(),
+        "/sign": (context) => const signin(),
+        "/register": (context) => const register(),
+        "/home": (context) => const Home_screen(),
+      },
   );
     
   }
