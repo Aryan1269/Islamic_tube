@@ -9,6 +9,7 @@ class register extends StatefulWidget {
 }
 
 class _registerState extends State<register> {
+  final _formKey = GlobalKey<FormState>(); //added
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,36 +40,59 @@ class _registerState extends State<register> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 20, horizontal: 33),
-                    child: Column(
-                      children: [
-                        const TextField(
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.name,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter Your Name";
+                              } else if (value.length < 3) {
+                                return "Name is too short";
+                              } else {
+                                return null;
+                              }
+                            },
+                            decoration: InputDecoration(
                               hintText: "Name",
                               labelText: "Enter Your Name",
                               hintStyle: TextStyle(color: Colors.green),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30.0)),
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        const TextField(
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              hintText: "Mobile Number",
-                              hintStyle: TextStyle(color: Colors.green),
-                              labelText: "Mobile Number",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30.0),
-                                  // Color:Colors.green,
-                                ),
-                              )),
-                        ),
-                      ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            maxLength: 10,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter Mobile Number";
+                              } else if (value.length < 10) {
+                                return "number should contain only 10 digit";
+                              } else {
+                                return null;
+                              }
+                            },
+                            decoration: InputDecoration(
+                                hintText: "Mobile Number",
+                                hintStyle: TextStyle(color: Colors.green),
+                                labelText: "Mobile Number",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30.0),
+                                    // Color:Colors.green,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -78,7 +102,7 @@ class _registerState extends State<register> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
+                            vertical: 10, horizontal: 38),
                         child: SizedBox(
                           height: 55,
                           width: 130,
@@ -126,11 +150,13 @@ class _registerState extends State<register> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(40, 40, 40, 5),
                     child: SizedBox(
-                      width: 250,
+                      width: 320,
                       height: 55,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/home");
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushNamed(context, "/home");
+                          } else {}
                         },
                         child: Text(
                           "REGISTER",
@@ -172,7 +198,7 @@ class _registerState extends State<register> {
                             style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.blue)),
+                                        Colors.green)),
                             onPressed: () {
                               Navigator.pushNamed(context, "/sign");
                             },

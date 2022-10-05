@@ -9,6 +9,8 @@ class signin extends StatefulWidget {
 }
 
 class _MyLoginState extends State<signin> {
+  
+  final _formKey=GlobalKey<FormState>();  //added
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,17 +36,37 @@ class _MyLoginState extends State<signin> {
             // const SizedBox(
             //           height: 20,
             //         ),
-            Padding(
-              padding: const EdgeInsets.all(30),
-              child: const TextField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    hintText: "Enter Number",
-                    labelText: "Enter Your Mobile Number",
-                    hintStyle: TextStyle(color: Colors.green),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    )),
+            Form(
+                  key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(30),
+                    child:  TextFormField(
+                      keyboardType: TextInputType.number,
+                     validator: (value) {
+                              if (value!.isEmpty){
+                                return "Please Enter Mobile Number";
+                              }else if(value.length<10) {
+                                return "number should contain only 10 digit";
+                              }
+                              else if(value.length>10) {
+                                return "number should contain only 10 digit";
+                              }
+                              else{
+                                return null;
+                              }
+                            },
+                      decoration: InputDecoration(
+                          hintText: "Enter Number",
+                          labelText: "Enter Your Mobile Number",
+                          hintStyle: TextStyle(color: Colors.green),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          )),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
@@ -107,7 +129,11 @@ class _MyLoginState extends State<signin> {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: () {
+                     if(_formKey.currentState!.validate()){
                     Navigator.pushNamed(context, "/home");
+                     }else{
+                            
+                          }
                   },
                   child: Text(
                     "SIGN IN",
@@ -145,7 +171,7 @@ class _MyLoginState extends State<signin> {
                   TextButton(
                     style: ButtonStyle(
                       foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
+                          MaterialStateProperty.all<Color>(Colors.green),
                     ),
                     onPressed: () {
                      Navigator.pushNamed(context, "/register");

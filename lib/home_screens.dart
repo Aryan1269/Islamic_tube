@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:islamic_tube/home.dart';
+import 'package:islamic_tube/tabs/library.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -27,7 +24,7 @@ class _Home_screenState extends State<Home_screen> {
                 unselectedLabelColor: Colors.white,
                 indicatorColor: Colors.transparent,
                 labelColor: Colors.black,
-                labelStyle: TextStyle(fontSize: 10),
+                labelStyle: TextStyle(fontSize: 8),
                 labelPadding: const EdgeInsets.all(0),
                 // ignore: prefer_const_literals_to_create_immutables
                 tabs: [
@@ -58,13 +55,10 @@ class _Home_screenState extends State<Home_screen> {
                 Center(
                   child: Text('home'),
                 ),
-                Center(
-                  child: Text('home'),
-                ),
+                LIBRARYs(),
               ]),
             ),
           )),
     );
-    
   }
 }
