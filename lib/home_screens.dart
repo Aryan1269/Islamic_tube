@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_tube/home.dart';
 import 'package:islamic_tube/tabs/library.dart';
+import 'package:islamic_tube/tabs/subscription.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -52,9 +53,8 @@ class _Home_screenState extends State<Home_screen> {
                 Center(
                   child: Text('home'),
                 ),
-                Center(
-                  child: Text('home'),
-                ),
+               subscription(),
+               
                 LIBRARYs(),
               ]),
             ),
