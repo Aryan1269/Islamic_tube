@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:islamic_tube/home.dart';
+import 'package:islamic_tube/screens/prac.dart';
 import 'package:islamic_tube/tabs/library.dart';
 import 'package:islamic_tube/tabs/subscription.dart';
+import 'package:islamic_tube/tabs/trending.dart';
+import 'package:islamic_tube/tabs/videocard.dart';
+// import 'package:islamic_tube/videocard.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -46,19 +50,21 @@ class _Home_screenState extends State<Home_screen> {
                 ],
               ),
               body: TabBarView(children: [
-                home(),
-                Center(
-                  child: Text('home'),
-                ),
-                Center(
-                  child: Text('home'),
-                ),
+                
+                demov(),
+                Trending(),
+            //  videocard(),
+            home(),
                subscription(),
-               
+
                 LIBRARYs(),
               ]),
             ),
-          )),
+          )
+          ),
+          
+
     );
+    
   }
 }

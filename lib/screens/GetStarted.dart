@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:islamic_tube/screens/Register.dart';
 import 'CustomAppBar.dart';
@@ -32,7 +34,7 @@ class _GetStartedState extends State<GetStarted> {
         ],
       ),
       margin: const EdgeInsets.all(20),
-      width: 320,
+      width: MediaQuery.of(context).size.width*0.85,
       height: 90,
       child: Center(
         child: Text(
@@ -52,64 +54,69 @@ class _GetStartedState extends State<GetStarted> {
     return Scaffold(
       appBar: CustomAppBar(),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              "Welcome to\nIslamic Videos",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 42,
-                color: Color(0xff4da92b),
-                shadows: [
-                  Shadow(
-                    color: Color(0xff4da92b),
-                    blurRadius: 5,
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
-            for (var item in quotes) buildTitle(item),
-            SizedBox(
-              height: 10,
-            ),
-            new SizedBox(
-              height: 60,
-              width: 290,
-              child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 70, 249, 5),
-                    textStyle: TextStyle(
-                      fontSize: 18,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.bold,
+        child: Center(
+          child: Column(
+            // mainAxisAlignment:MainAxisAlignment.center ,
+            children: [
+              Text(
+                "Welcome to\nIslamic Videos",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 42,
+                  color: Color(0xff4da92b),
+                  shadows: [
+                    Shadow(
+                      color: Color(0xff4da92b),
+                      blurRadius: 5,
                     ),
-                    elevation: 5,
-                    shadowColor: Colors.grey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => register()));
-                  },
-                  icon: Text(
-                    'GET STARTED',
-                  ),
-                  label: Icon(Icons.forward)),
-            ),
-            SizedBox(
-              height: 50,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('Already have account ? sign in'),
-                style: TextButton.styleFrom(
-                  primary: Color(0xff4da92b),
+                  ],
                 ),
+                textAlign: TextAlign.center,
               ),
-            )
-          ],
+              for (var item in quotes) buildTitle(item),
+              SizedBox(
+                height: MediaQuery.of(context).size.height*0.02,
+              ),
+              new SizedBox(
+                height: MediaQuery.of(context).size.height*0.09,
+                width: MediaQuery.of(context).size.width*0.6 ,
+                child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 70, 249, 5),
+                      textStyle: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 2,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      elevation: 5,
+                      shadowColor: Colors.grey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (_) => register()));
+                    },
+                    icon: Text(
+                      'GET STARTED',
+                    ),
+                    label: Icon(Icons.forward)),
+              ),
+              SizedBox(
+                height:MediaQuery.of(context).size.height*0.05,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/sign");
+                  },
+                  child: Text('Already have account? sign in'),
+                  style: TextButton.styleFrom(
+                    primary: Color(0xff4da92b),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -12,10 +12,25 @@ class LIBRARYs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    Widget _userHistory(){
+      return Card(
+        margin: EdgeInsets.symmetric(vertical: 20,horizontal: 8),
+              // elevation: 50,
+              color: Colors.grey,
+              child: Container(
+              child: Text("Aryan"),
+              width: 200,
+              height: 100,
+              ),
+            );
+
+    }
+
     return Scaffold(
               backgroundColor: Colors.white,
 
       appBar:AppBar(
+        elevation: 1,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         leading: Image.asset('assets/Logo.png',scale: 1,),
@@ -27,60 +42,16 @@ class LIBRARYs extends StatelessWidget {
           SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(children: [
-            Card(
-              elevation: 50,
-              color: Colors.grey,
-              child: Container(
-                child: Text("Aryan"),
-                width: 200,
-                height: 100,
-              ),
-            ),
-            Card(
-              elevation: 50,
-              color: Colors.grey,
-              child: Container(
-                child: Text("Aryan"),
-                width: 200,
-                height: 100,
-              ),
-            ),
-            Card(
-              elevation: 50,
-              color: Colors.grey,
-              child: Container(
-                child: Text("Aryan"),
-                width: 200,
-                height: 100,
-              ),
-            ),
-            Card(
-              elevation: 50,
-              color: Colors.grey,
-              child: Container(
-                child: Text("Aryan"),
-                width: 200,
-                height: 100,
-              ),
-            ),
-            Card(
-              elevation: 50,
-              color: Colors.grey,
-              child: Container(
-                child: Text("Aryan"),
-                width: 200,
-                height: 100,
-              ),
-            ),
-            Card(
-              elevation: 50,
-              color: Colors.grey,
-              child: Container(
-                child: Text("Aryan"),
-                width: 200,
-                height: 100,
-              ),
-            ),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
+              _userHistory(),
           ]),
         ),
           ListTile(
