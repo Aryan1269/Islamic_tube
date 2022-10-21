@@ -4,6 +4,7 @@ import 'package:islamic_tube/screens/GetStarted.dart';
 import 'package:islamic_tube/screens/Register.dart';
 import 'package:islamic_tube/splashscreen.dart';
 import 'package:islamic_tube/screens/sigin.dart';
+import 'package:islamic_tube/tabs/search.dart';
 
 import 'home.dart';
 
@@ -33,6 +34,7 @@ class _MergedState extends State<Merged> {
         "/sign": (context) => const signin(),
         "/register": (context) => const register(),
         "/home": (context) => const Home_screen(),
+        // "/search": (context) =>  MysearchDelegate(),
       },
   );
     

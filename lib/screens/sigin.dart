@@ -29,7 +29,7 @@ class _MyLoginState extends State<signin> {
                       color: Colors.green,
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
-                      shadows: [Shadow(color: Colors.grey, blurRadius: 5)]),
+                      shadows: [Shadow(color: Colors.grey, blurRadius: 3)]),
                 ),
               ),
             ),
@@ -43,6 +43,7 @@ class _MyLoginState extends State<signin> {
                   Padding(
                     padding: const EdgeInsets.all(30),
                     child:  TextFormField(
+                      maxLength: 10,
                       keyboardType: TextInputType.number,
                      validator: (value) {
                               if (value!.isEmpty){
@@ -69,16 +70,16 @@ class _MyLoginState extends State<signin> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 25,
+             SizedBox(
+              height: MediaQuery.of(context).size.height*0.01,
             ),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: SizedBox(
-                    height: 55,
-                    width: 120,
+                     height: MediaQuery.of(context).size.height*0.07,
+                    width: MediaQuery.of(context).size.width*0.35,
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
@@ -101,8 +102,8 @@ class _MyLoginState extends State<signin> {
                   ),
                 ),
                 SizedBox(
-                  width: 130,
-                  height: 55,
+                  height: MediaQuery.of(context).size.height*0.07,
+                    width: MediaQuery.of(context).size.width*0.35 ,
                   child: TextField(
                     // scrollPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 33),
                     keyboardType: TextInputType.number,
@@ -121,16 +122,16 @@ class _MyLoginState extends State<signin> {
               ],
             ),
 
-            SizedBox(height: 30),
+            SizedBox(height:40),
             Padding(
-              padding: const EdgeInsets.fromLTRB(75, 10, 40, 5),
+              padding: const EdgeInsets.fromLTRB(40, 40, 40, 5),
               child: SizedBox(
-                width: 200,
-                height: 55,
+                 height: MediaQuery.of(context).size.height*0.07,
+                    width: MediaQuery.of(context).size.width*1 ,
                 child: ElevatedButton(
                   onPressed: () {
                      if(_formKey.currentState!.validate()){
-                    Navigator.pushNamed(context, "/home");
+                    Navigator.pushReplacementNamed(context, "/home");
                      }else{
                             
                           }
@@ -158,10 +159,11 @@ class _MyLoginState extends State<signin> {
             Padding(
               padding: const EdgeInsets.fromLTRB(50, 0, 20, 5),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     child: Text(
-                      " Don't have account? sign up ",
+                      " Don't have account?",
                       style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,

@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:islamic_tube/home.dart';
+import 'package:islamic_tube/screens/prac.dart';
 import 'package:islamic_tube/tabs/library.dart';
 import 'package:islamic_tube/tabs/subscription.dart';
+import 'package:islamic_tube/tabs/trending.dart';
+import 'package:islamic_tube/tabs/videocard.dart';
+// import 'package:islamic_tube/videocard.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -20,12 +24,12 @@ class _Home_screenState extends State<Home_screen> {
           length: 5,
           child: Builder(
             builder: (context) => Scaffold(
-              backgroundColor: Colors.green,
+              backgroundColor: Color.fromARGB(255, 50, 153, 39),
               bottomNavigationBar: TabBar(
                 unselectedLabelColor: Colors.white,
                 indicatorColor: Colors.transparent,
-                labelColor: Colors.black,
-                labelStyle: TextStyle(fontSize: 8),
+                labelColor: Color.fromARGB(255, 7, 7, 7),
+                labelStyle: TextStyle(fontSize: 9),
                 labelPadding: const EdgeInsets.all(0),
                 // ignore: prefer_const_literals_to_create_immutables
                 tabs: [
@@ -35,6 +39,7 @@ class _Home_screenState extends State<Home_screen> {
                       height: 60,
                       icon: Icon(Icons.add_circle_outline),
                       text: 'Create'),
+                      
                   Tab(
                       height: 60,
                       icon: Icon(Icons.subscriptions_outlined),
@@ -46,19 +51,20 @@ class _Home_screenState extends State<Home_screen> {
                 ],
               ),
               body: TabBarView(children: [
+                
+                demov(),
+                Trending(),
+            //  videocard(),
                 home(),
-                Center(
-                  child: Text('home'),
-                ),
-                Center(
-                  child: Text('home'),
-                ),
                subscription(),
-               
                 LIBRARYs(),
               ]),
             ),
-          )),
+          )
+          ),
+          
+
     );
+    
   }
 }

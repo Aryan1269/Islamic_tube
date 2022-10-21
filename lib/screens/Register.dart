@@ -66,7 +66,7 @@ class _registerState extends State<register> {
                             ),
                           ),
                           SizedBox(
-                            height: 40,
+                            height: MediaQuery.of(context).size.height*0.04
                           ),
                           TextFormField(
                             keyboardType: TextInputType.number,
@@ -104,8 +104,8 @@ class _registerState extends State<register> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 38),
                         child: SizedBox(
-                          height: 55,
-                          width: 130,
+                           height: MediaQuery.of(context).size.height*0.07,
+                    width: MediaQuery.of(context).size.width*0.35,
                           child: ElevatedButton(
                             onPressed: () {},
                             child: Text(
@@ -128,8 +128,8 @@ class _registerState extends State<register> {
                         ),
                       ),
                       SizedBox(
-                        width: 150,
-                        height: 55,
+                          height: MediaQuery.of(context).size.height*0.07,
+                    width: MediaQuery.of(context).size.width*0.35,
                         child: TextField(
                           // scrollPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 33),
                           keyboardType: TextInputType.number,
@@ -150,12 +150,12 @@ class _registerState extends State<register> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(40, 40, 40, 5),
                     child: SizedBox(
-                      width: 320,
-                      height: 55,
+                      height: MediaQuery.of(context).size.height*0.07,
+                    width: MediaQuery.of(context).size.width*1 ,
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, "/home");
+                            Navigator.pushReplacementNamed(context, "/home");
                           } else {}
                         },
                         child: Text(
