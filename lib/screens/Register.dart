@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:islamic_tube/screens/CustomAppBar.dart';
 
 class register extends StatefulWidget {
@@ -10,6 +12,14 @@ class register extends StatefulWidget {
 
 class _registerState extends State<register> {
   final _formKey = GlobalKey<FormState>(); //added
+
+  bool loading = false;
+  final auth = FirebaseAuth.instance;
+  final auth2 = FirebaseAuth.instance;
+  final phoneNumberController = TextEditingController();
+  final phoneNumberControllerotp = TextEditingController();
+  late final String verification;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +75,15 @@ class _registerState extends State<register> {
                               ),
                             ),
                           ),
+
                           SizedBox(
-                            height: MediaQuery.of(context).size.height*0.04
-                          ),
+                              height:
+                                  MediaQuery.of(context).size.height * 0.04),
+
+//mobile no firebase
+
                           TextFormField(
+                            controller: phoneNumberController,
                             keyboardType: TextInputType.number,
                             maxLength: 10,
                             validator: (value) {
@@ -104,10 +119,42 @@ class _registerState extends State<register> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 38),
                         child: SizedBox(
-                           height: MediaQuery.of(context).size.height*0.07,
-                    width: MediaQuery.of(context).size.width*0.35,
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          width: MediaQuery.of(context).size.width * 0.35,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              auth.verifyPhoneNumber(
+                                  phoneNumber:
+                                      "+91${phoneNumberController.text}",
+                                  verificationCompleted: (_) {},
+                                  verificationFailed: (e) {
+                                    print(e);
+                                    Fluttertoast.showToast(
+                                        msg: "$e",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  },
+                                  codeSent:
+                                      (String verificationId, int? token) {
+                                    verification = verificationId;
+                                  },
+                                  codeAutoRetrievalTimeout: (e) {
+                                    print(e);
+
+                                    Fluttertoast.showToast(
+                                        msg: "$e",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  });
+                            },
                             child: Text(
                               "Send OTP",
                               style: TextStyle(
@@ -127,11 +174,14 @@ class _registerState extends State<register> {
                           ),
                         ),
                       ),
+
+                      //otp
                       SizedBox(
-                          height: MediaQuery.of(context).size.height*0.07,
-                    width: MediaQuery.of(context).size.width*0.35,
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         child: TextField(
-                          // scrollPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 33),
+                          controller: phoneNumberControllerotp,
+                          maxLength: 6,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                               hintText: "OTP",
@@ -148,15 +198,34 @@ class _registerState extends State<register> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(40, 40, 40, 5),
+                    padding: const EdgeInsets.all(20),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height*0.07,
-                    width: MediaQuery.of(context).size.width*1 ,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      width: MediaQuery.of(context).size.width * 1,
                       child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                        onPressed: () async {
+                          final credential = PhoneAuthProvider.credential(
+                              verificationId: verification,
+                              smsCode:
+                                  phoneNumberControllerotp.text.toString());
+
+                          try {
+                            await auth2.signInWithCredential(credential);
                             Navigator.pushReplacementNamed(context, "/home");
-                          } else {}
+                          } catch (e) {
+                            Fluttertoast.showToast(
+                                msg: "error${e}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 5,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+
+                          // if (_formKey.currentState!.validate()) {
+                          //   Navigator.pushReplacementNamed(context, "/home");
+                          // } else {}
                         },
                         child: Text(
                           "REGISTER",

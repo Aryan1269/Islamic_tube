@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1084964190768",
+    "project_id": "islamtube-36d80",
+    "storage_bucket": "islamtube-36d80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084964190768:android:d44201ec53ea97ac494bf5",
+        "android_client_info": {
+          "package_name": "com.example.islamic_tube"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084964190768-ge41ea9kdpj1pi4hblqe54rr7mp1jb8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRmp_jEd_uiNm53CV7HrlBhCT4pVLjOpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084964190768-ge41ea9kdpj1pi4hblqe54rr7mp1jb8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
