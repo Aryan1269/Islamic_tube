@@ -4,7 +4,7 @@ import 'package:islamic_tube/screens/GetStarted.dart';
 import 'package:islamic_tube/screens/Register.dart';
 import 'package:islamic_tube/splashscreen.dart';
 import 'package:islamic_tube/screens/sigin.dart';
-import 'package:islamic_tube/tabs/search.dart';
+import 'package:islamic_tube/AppBarFun/search.dart';
 
 import 'home.dart';
 

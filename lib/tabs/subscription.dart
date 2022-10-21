@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:islamic_tube/tabs/search.dart';
+import 'package:islamic_tube/AppBarFun/search.dart';
 
 class subscription extends StatefulWidget {
   const subscription({Key? key}) : super(key: key);

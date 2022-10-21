@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_tube/tabs/search.dart';
-
+import 'package:islamic_tube/AppBarFun/search.dart';
+import '../home.dart';
 import '../screens/videofeed.dart';
 // import 'package:youtube_clone/videoInfo.dart';
       
@@ -12,36 +12,12 @@ class Trending extends StatefulWidget {
 }
 
 class _TrendingState extends State<Trending> {
-  List<IconData> Icondata = [
-    Icons.cast_sharp,
-    Icons.notifications,
-    Icons.search,
-    Icons.account_circle,
-  ];
    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-        elevation: 1,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        leading: Image.asset(
-          'assets/Logo.png',
-          scale: 1,
-        ),
-
-        // actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.cast)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-          IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: MysearchDelegate());
-              },
-              icon: Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
-        ],
+      appBar:PreferredSize(child: home(),
+        preferredSize: Size.fromHeight(60),
       ),
       body: Container(
         color: Colors.white,

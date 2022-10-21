@@ -14,12 +14,7 @@ class videocard extends StatefulWidget {
 }
 
 class _videocardState extends State<videocard> {
-  List<IconData> Icondata = [
-    Icons.cast_sharp,
-    Icons.notifications,
-    Icons.search,
-    Icons.account_circle,
-  ];
+
   @override
   Widget build(BuildContext context) {
 
@@ -42,13 +37,8 @@ class _videocardState extends State<videocard> {
                 
     }
     return Scaffold(
-      appBar: AppBar(  
-        elevation: 1,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        leading: Image.asset('assets/Logo.png',scale: 1,),
-        
-        actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
+      appBar: PreferredSize(child: home(),
+        preferredSize: Size.fromHeight(60),
       ),
 
       

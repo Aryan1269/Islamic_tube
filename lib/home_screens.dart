@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:islamic_tube/home.dart';
-import 'package:islamic_tube/screens/prac.dart';
+import 'package:islamic_tube/tabs/Mainhome.dart';
 import 'package:islamic_tube/tabs/library.dart';
 import 'package:islamic_tube/tabs/subscription.dart';
-import 'package:islamic_tube/tabs/trending.dart';
+import 'package:islamic_tube/tabs/Explore.dart';
 import 'package:islamic_tube/tabs/videocard.dart';
 // import 'package:islamic_tube/videocard.dart';
 
@@ -52,7 +52,7 @@ class _Home_screenState extends State<Home_screen> {
               ),
               body: TabBarView(children: [
                 
-                demov(),
+                mainHome(),
                 Trending(),
             //  videocard(),
                 home(),

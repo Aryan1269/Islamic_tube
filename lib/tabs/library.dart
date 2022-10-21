@@ -29,14 +29,9 @@ class LIBRARYs extends StatelessWidget {
     return Scaffold(
               backgroundColor: Colors.white,
 
-      appBar:AppBar(
-        elevation: 1,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        leading: Image.asset('assets/Logo.png',scale: 1,),
-        
-        actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
-   ),
+      appBar:PreferredSize(child: home(),
+        preferredSize: Size.fromHeight(60),
+      ),
       body: ListView(
         children: [
           SingleChildScrollView(
