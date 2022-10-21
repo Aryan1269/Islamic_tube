@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_tube/tabs/search.dart';
 
 import '../screens/videofeed.dart';
 // import 'package:youtube_clone/videoInfo.dart';
@@ -21,14 +22,26 @@ class _TrendingState extends State<Trending> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:  AppBar(
         elevation: 1,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        leading: Image.asset('assets/Logo.png',scale: 1,),
-        
-        actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
-     
+        leading: Image.asset(
+          'assets/Logo.png',
+          scale: 1,
+        ),
+
+        // actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.cast)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: MysearchDelegate());
+              },
+              icon: Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
+        ],
       ),
       body: Container(
         color: Colors.white,
@@ -39,7 +52,7 @@ class _TrendingState extends State<Trending> {
               child: Column(
                 children: [
                   Row(
-                    // scrollDirection: Axis.horizontal,
+                    
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),

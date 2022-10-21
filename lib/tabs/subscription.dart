@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:islamic_tube/tabs/search.dart';
 
 class subscription extends StatefulWidget {
   const subscription({Key? key}) : super(key: key);
@@ -33,11 +34,25 @@ class _subscriptionState extends State<subscription> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         backgroundColor: Colors.white,
+        elevation: 1,
+        backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        leading: Image.asset('assets/Logo.png',scale: 1,),
-        
-        actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
+        leading: Image.asset(
+          'assets/Logo.png',
+          scale: 1,
+        ),
+
+        // actions:Icondata.map((I)=>IconButton(onPressed: (){}, icon: Icon(I))).toList(),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.cast)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: MysearchDelegate());
+              },
+              icon: Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
+        ],
       ),
       body: Container(
         child: Card(
