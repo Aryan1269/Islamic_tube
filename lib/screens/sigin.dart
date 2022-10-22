@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:islamic_tube/screens/CustomAppBar.dart';
 
 class signin extends StatefulWidget {
@@ -10,18 +12,24 @@ class signin extends StatefulWidget {
 
 class _MyLoginState extends State<signin> {
   
-  final _formKey=GlobalKey<FormState>();  //added
+  final auth = FirebaseAuth.instance;
+  final auth2 = FirebaseAuth.instance;
+  final phoneNumberController = TextEditingController();
+  final phoneNumberControllerotp = TextEditingController();
+  late final String verification;
+
+  final _formKey = GlobalKey<FormState>(); //added
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:CustomAppBar(),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 40, 20),
+              padding: const EdgeInsets.fromLTRB(20, 20, 40, 20),
               child: Center(
                 child: const Text(
                   'SIGN IN',
@@ -33,55 +41,79 @@ class _MyLoginState extends State<signin> {
                 ),
               ),
             ),
-            // const SizedBox(
-            //           height: 20,
-            //         ),
+
             Form(
-                  key: _formKey,
+              key: _formKey,
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(30),
-                    child:  TextFormField(
+                    child: TextFormField(
+                      controller: phoneNumberController,
                       maxLength: 10,
                       keyboardType: TextInputType.number,
-                     validator: (value) {
-                              if (value!.isEmpty){
-                                return "Please Enter Mobile Number";
-                              }else if(value.length<10) {
-                                return "number should contain only 10 digit";
-                              }
-                              else if(value.length>10) {
-                                return "number should contain only 10 digit";
-                              }
-                              else{
-                                return null;
-                              }
-                            },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please Enter Mobile Number";
+                        } else if (value.length < 10) {
+                          return "number should contain only 10 digit";
+                        } else {
+                          return null;
+                        }
+                      },
                       decoration: InputDecoration(
                           hintText: "Enter Number",
                           labelText: "Enter Your Mobile Number",
                           hintStyle: TextStyle(color: Colors.green),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
                           )),
                     ),
                   ),
                 ],
               ),
             ),
-             SizedBox(
-              height: MediaQuery.of(context).size.height*0.01,
-            ),
+
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: SizedBox(
-                     height: MediaQuery.of(context).size.height*0.07,
-                    width: MediaQuery.of(context).size.width*0.35,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.35,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        auth.verifyPhoneNumber(
+                            phoneNumber: "+91${phoneNumberController.text}",
+                            verificationCompleted: (_) {},
+                            verificationFailed: (e) {
+                              print(e);
+                              Fluttertoast.showToast(
+                                  msg: "$e",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            },
+                            codeSent: (String verificationId, int? token) {
+                              verification = verificationId;
+                            },
+                            codeAutoRetrievalTimeout: (e) {
+                              print(e);
+
+                              Fluttertoast.showToast(
+                                  msg: "$e",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            });
+                      },
                       child: Text(
                         "Send OTP",
                         style: TextStyle(
@@ -102,10 +134,12 @@ class _MyLoginState extends State<signin> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.07,
-                    width: MediaQuery.of(context).size.width*0.35 ,
+                  // height: MediaQuery.of(context).size.height * 0.07,
+                  // width: MediaQuery.of(context).size.width * 0.35, 
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  width: MediaQuery.of(context).size.width * 0.35,
                   child: TextField(
-                    // scrollPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 33),
+                    controller: phoneNumberControllerotp,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         hintText: "OTP",
@@ -121,19 +155,43 @@ class _MyLoginState extends State<signin> {
                 ),
               ],
             ),
-
-            SizedBox(height:40),
+            
             Padding(
               padding: const EdgeInsets.fromLTRB(40, 40, 40, 5),
               child: SizedBox(
-                 height: MediaQuery.of(context).size.height*0.07,
-                    width: MediaQuery.of(context).size.width*1 ,
+                height: MediaQuery.of(context).size.height * 0.07,
+                width: MediaQuery.of(context).size.width * 1,
                 child: ElevatedButton(
-                  onPressed: () {
-                     if(_formKey.currentState!.validate()){
-                    Navigator.pushReplacementNamed(context, "/home");
-                     }else{
-                            
+                  onPressed: () async {
+
+                    if (_formKey.currentState!.validate()){
+                          final credential = PhoneAuthProvider.credential(
+                              verificationId: verification,
+                              smsCode:
+                                  phoneNumberControllerotp.text.toString());
+
+                          try {
+                            await auth2.signInWithCredential(credential);
+                            Navigator.pushReplacementNamed(context, "/home");
+                          } catch (e) {
+                            Fluttertoast.showToast(
+                                msg: "error${e}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 5,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                          }else {
+                            Fluttertoast.showToast(
+                                msg: "Make sure all the fields are filled ",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 5,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
                           }
                   },
                   child: Text(
@@ -157,7 +215,7 @@ class _MyLoginState extends State<signin> {
             ),
             //  SizedBox(height: 30,),
             Padding(
-              padding: const EdgeInsets.fromLTRB(50, 0, 20, 5),
+              padding: const EdgeInsets.fromLTRB(35, 0, 20, 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -176,7 +234,7 @@ class _MyLoginState extends State<signin> {
                           MaterialStateProperty.all<Color>(Colors.green),
                     ),
                     onPressed: () {
-                     Navigator.pushNamed(context, "/register");
+                      Navigator.pushNamed(context, "/register");
                     },
                     child: Text(
                       'Register',

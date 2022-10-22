@@ -13,7 +13,6 @@ class register extends StatefulWidget {
 class _registerState extends State<register> {
   final _formKey = GlobalKey<FormState>(); //added
 
-  bool loading = false;
   final auth = FirebaseAuth.instance;
   final auth2 = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
@@ -110,16 +109,13 @@ class _registerState extends State<register> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 38),
+                            vertical: 0.0, horizontal: 38),
                         child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: 50,
                           width: MediaQuery.of(context).size.width * 0.35,
                           child: ElevatedButton(
                             onPressed: () {
@@ -177,11 +173,12 @@ class _registerState extends State<register> {
 
                       //otp
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        // height: MediaQuery.of(context).size.height * 0.07,
+                        // width: MediaQuery.of(context).size.width * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         width: MediaQuery.of(context).size.width * 0.35,
                         child: TextField(
                           controller: phoneNumberControllerotp,
-                          maxLength: 6,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                               hintText: "OTP",
@@ -198,12 +195,13 @@ class _registerState extends State<register> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.fromLTRB(45, 30, 40, 5),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      width: MediaQuery.of(context).size.width * 1,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       child: ElevatedButton(
                         onPressed: () async {
+                          if (_formKey.currentState!.validate()){
                           final credential = PhoneAuthProvider.credential(
                               verificationId: verification,
                               smsCode:
@@ -215,6 +213,16 @@ class _registerState extends State<register> {
                           } catch (e) {
                             Fluttertoast.showToast(
                                 msg: "error${e}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 5,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                          }else {
+                            Fluttertoast.showToast(
+                                msg: "Make sure all the fields are filled ",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
                                 timeInSecForIosWeb: 5,
@@ -251,7 +259,7 @@ class _registerState extends State<register> {
                     child: Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 95),
+                          padding: EdgeInsets.only(left: 80),
                         ),
                         Center(
                           child: const Text(
