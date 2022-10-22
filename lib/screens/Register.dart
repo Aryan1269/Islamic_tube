@@ -198,9 +198,9 @@ class _registerState extends State<register> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(10),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.07,
+                      height: MediaQuery.of(context).size.height * 0.7,
                       width: MediaQuery.of(context).size.width * 1,
                       child: ElevatedButton(
                         onPressed: () async {
