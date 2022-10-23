@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
+import 'dart:io';
+import 'package:islamic_tube/firebase_storage/upload.dart';
+import 'package:path/path.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:islamic_tube/firebase_storage/myVideo.dart';
 import 'package:islamic_tube/home.dart';
 import 'package:islamic_tube/tabs/Mainhome.dart';
 import 'package:islamic_tube/tabs/library.dart';
@@ -20,8 +25,12 @@ class Home_screen extends StatefulWidget {
 }
 
 class _Home_screenState extends State<Home_screen> {
+  UploadTask? task;
+  File? file;
   @override
   Widget build(BuildContext context) {
+    final fileName = file != null ? basename(file!.path) : 'no file selected';
+
     return Container(
       child: DefaultTabController(
           length: 5,
@@ -60,7 +69,7 @@ class _Home_screenState extends State<Home_screen> {
                 ],
               ),
               body: TabBarView(children: [
-                mainHome(),
+                Video(),
                 Trending(),
                 //  videocard(),
                 home(),
@@ -86,6 +95,7 @@ class _Home_screenState extends State<Home_screen> {
               children: <Widget>[
                 const Text('Modal BottomSheet'),
                 pickFile(context),
+               
                 upload(context),
                 ElevatedButton(
                   child: const Text('Close BottomSheet'),
@@ -104,14 +114,40 @@ class _Home_screenState extends State<Home_screen> {
         label: Text("pick"),
         icon: Icon(Icons.file_upload),
         onPressed: () {
-         
+          selectFile();
         });
   }
 
   ElevatedButton upload(BuildContext context) {
     return ElevatedButton.icon(
-        label: Text("upload"), icon: Icon(Icons.file_upload), onPressed: () {});
+        label: Text("upload"),
+        icon: Icon(Icons.file_upload),
+        onPressed: () {
+          // uploadFile();
+        });
   }
 
- 
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['mp3', 'mp4'],
+        allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+    setState(() {
+      file = File(path);
+    });
+    final fileName = basename(file!.path);
+    final destionation = 'files/$fileName';
+    MYFirebasebaseStorage.uploadFile(destionation, file!);
+    setState(() {});
+  }
+
+  // Future uploadFile() async {
+  //   if (file == null) return;
+  //   final fileName = basename(file!.path);
+  //   final destionation = 'files/$fileName';
+  //   MYFirebasebaseStorage.uploadFile(destionation, file!);
+  //   setState(() {});
+  // }
 }
