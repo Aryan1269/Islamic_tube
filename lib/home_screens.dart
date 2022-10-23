@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:islamic_tube/firebase_storage/upload.dart';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
@@ -88,21 +89,19 @@ class _Home_screenState extends State<Home_screen> {
         return Container(
           height: 200,
           color: Colors.amber,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Modal BottomSheet'),
-                pickFile(context),
-               
-                upload(context),
-                ElevatedButton(
-                  child: const Text('Close BottomSheet'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+             const Text('Create'),
+              pickFile(context),
+
+              ElevatedButton(
+                child: const Text('Close BottomSheet'),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
           ),
         );
       },
@@ -111,26 +110,19 @@ class _Home_screenState extends State<Home_screen> {
 
   ElevatedButton pickFile(BuildContext context) {
     return ElevatedButton.icon(
-        label: Text("pick"),
+        label: Text("select and upload"),
         icon: Icon(Icons.file_upload),
         onPressed: () {
           selectFile();
         });
   }
 
-  ElevatedButton upload(BuildContext context) {
-    return ElevatedButton.icon(
-        label: Text("upload"),
-        icon: Icon(Icons.file_upload),
-        onPressed: () {
-          // uploadFile();
-        });
-  }
+
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['mp3', 'mp4'],
+        // type: FileType.custom,
+        // allowedExtensions: ['mp3', 'mp4'],
         allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
@@ -140,7 +132,8 @@ class _Home_screenState extends State<Home_screen> {
     final fileName = basename(file!.path);
     final destionation = 'files/$fileName';
     MYFirebasebaseStorage.uploadFile(destionation, file!);
-    setState(() {});
+    setState(() {
+    });
   }
 
   // Future uploadFile() async {
