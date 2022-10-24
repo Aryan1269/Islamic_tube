@@ -4,12 +4,19 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'MyVideo.dart';
+
 class MYFirebasebaseStorage {
-  static UploadTask? uploadFile(String destionation, File file) {
+  static Future<UploadTask?> uploadFile(String destionation, File file) async {
     try {
       final ref = FirebaseStorage.instance.ref(destionation);
+      var downloadUrl = await ref.getDownloadURL();
+      final String url = downloadUrl.toString();
+      print("aryan");
+      print(url);
+      // VideoWidget(play: true, url: url);
       Fluttertoast.showToast(
-          msg: "successful",
+          msg: "$url",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 20,
@@ -17,7 +24,6 @@ class MYFirebasebaseStorage {
           textColor: Colors.white,
           fontSize: 16.0);
       return ref.putFile(file);
-
     } catch (e) {
       Fluttertoast.showToast(
           msg: "error",

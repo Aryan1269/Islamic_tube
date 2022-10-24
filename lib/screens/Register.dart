@@ -201,26 +201,26 @@ class _registerState extends State<register> {
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: ElevatedButton(
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()){
-                          final credential = PhoneAuthProvider.credential(
-                              verificationId: verification,
-                              smsCode:
-                                  phoneNumberControllerotp.text.toString());
+                          if (_formKey.currentState!.validate()) {
+                            final credential = PhoneAuthProvider.credential(
+                                verificationId: verification,
+                                smsCode:
+                                    phoneNumberControllerotp.text.toString());
 
-                          try {
-                            await auth2.signInWithCredential(credential);
-                            Navigator.pushReplacementNamed(context, "/home");
-                          } catch (e) {
-                            Fluttertoast.showToast(
-                                msg: "error${e}",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 5,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
-                          }
-                          }else {
+                            try {
+                              await auth2.signInWithCredential(credential);
+                              Navigator.pushReplacementNamed(context, "/home");
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                  msg: "error${e}",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 5,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            }
+                          } else {
                             Fluttertoast.showToast(
                                 msg: "Make sure all the fields are filled ",
                                 toastLength: Toast.LENGTH_SHORT,
@@ -254,6 +254,21 @@ class _registerState extends State<register> {
                         ),
                       ),
                     ),
+                  ),
+                  Center(
+                    child: Container(
+                        child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, "/home");
+                      },
+                      icon: Icon(Icons
+                          .assignment_ind_sharp), //icon data for elevated button
+                      label: Text("Reister with google"),
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 102, 211,
+                              34) //elevated btton background color
+                          ), //label text
+                    )),
                   ),
                   Center(
                     child: Row(

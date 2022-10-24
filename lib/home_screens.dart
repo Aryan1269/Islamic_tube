@@ -1,21 +1,20 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
-import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:islamic_tube/firebase_storage/feeds.dart';
 import 'package:islamic_tube/firebase_storage/upload.dart';
-import 'package:path/path.dart';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:islamic_tube/firebase_storage/myVideo.dart';
 import 'package:islamic_tube/home.dart';
-import 'package:islamic_tube/tabs/Mainhome.dart';
+import 'package:path/path.dart';
 import 'package:islamic_tube/tabs/library.dart';
 import 'package:islamic_tube/tabs/subscription.dart';
 import 'package:islamic_tube/tabs/Explore.dart';
-import 'package:islamic_tube/tabs/videocard.dart';
 
-import 'bottomSheet/customWidgets.dart';
+
 // import 'package:islamic_tube/videocard.dart';
 
 class Home_screen extends StatefulWidget {
@@ -70,7 +69,8 @@ class _Home_screenState extends State<Home_screen> {
                 ],
               ),
               body: TabBarView(children: [
-                Video(),
+                // mainHome(),
+              feeds(),
                 Trending(),
                 //  videocard(),
                 home(),
