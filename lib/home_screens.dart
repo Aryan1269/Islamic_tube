@@ -36,19 +36,19 @@ class _Home_screenState extends State<Home_screen> {
           length: 5,
           child: Builder(
             builder: (context) => Scaffold(
-              backgroundColor: Color.fromARGB(245, 50, 153, 39),
+              backgroundColor: Color.fromARGB(245, 50, 153, 38),
               bottomNavigationBar: TabBar(
                 isScrollable: false,
                 unselectedLabelColor: Colors.white,
                 indicatorColor: Colors.transparent,
                 labelColor: Color.fromARGB(245, 7, 7, 7),
-                labelStyle: TextStyle(fontSize: 9),
+                labelStyle: TextStyle(fontSize: 8),
                 labelPadding: const EdgeInsets.all(0),
                 // ignore: prefer_const_literals_to_create_immutables
                 tabs: [
-                  Tab(height: 45, icon: Icon(Icons.home), text: 'Home'),
-                  Tab(height: 45, icon: Icon(Icons.explore), text: 'Explore'),
-                  Tab(
+                  Tab(height: MediaQuery.of(context).size.height * 0.08, icon: Icon(Icons.home), text: 'Home'),
+                  Tab(height: MediaQuery.of(context).size.height * 0.08, icon: Icon(Icons.explore), text: 'Explore'),
+                  Tab(height: MediaQuery.of(context).size.height * 0.09,
                     icon: IconButton(
                       onPressed: () {
                         bottom(context);
@@ -59,11 +59,11 @@ class _Home_screenState extends State<Home_screen> {
                     text: '',
                   ),
                   Tab(
-                      height: 45,
+                      height: MediaQuery.of(context).size.height * 0.08,
                       icon: Icon(Icons.subscriptions_outlined),
-                      text: 'SUBSCRIPTIONs'),
+                      text: 'SUBSCRIPTION'),
                   Tab(
-                      height: 45,
+                      height: MediaQuery.of(context).size.height * 0.08,
                       icon: Icon(Icons.library_add),
                       text: 'LIBRARY'),
                 ],
