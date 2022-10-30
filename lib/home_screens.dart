@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:islamic_tube/firebase_storage/feeds.dart';
+import 'package:islamic_tube/firebase_storage/MyVideo.dart';
 import 'package:islamic_tube/firebase_storage/upload.dart';
 
 import 'package:file_picker/file_picker.dart';
@@ -14,7 +14,6 @@ import 'package:path/path.dart';
 import 'package:islamic_tube/tabs/library.dart';
 import 'package:islamic_tube/tabs/subscription.dart';
 import 'package:islamic_tube/tabs/Explore.dart';
-
 
 // import 'package:islamic_tube/videocard.dart';
 
@@ -70,8 +69,9 @@ class _Home_screenState extends State<Home_screen> {
                 ],
               ),
               body: TabBarView(children: [
-                mainHome(),
-              
+                // mainHome(),
+                videoPlayer(),
+
                 Trending(),
                 //  videocard(),
                 home(),
@@ -95,9 +95,8 @@ class _Home_screenState extends State<Home_screen> {
             // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-             const Text('Create'),
+              const Text('Create'),
               pickFile(context),
-
               ElevatedButton(
                 child: const Text('Close BottomSheet'),
                 onPressed: () => Navigator.pop(context),
@@ -118,8 +117,6 @@ class _Home_screenState extends State<Home_screen> {
         });
   }
 
-
-
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(
         // type: FileType.custom,
@@ -133,8 +130,7 @@ class _Home_screenState extends State<Home_screen> {
     final fileName = basename(file!.path);
     final destionation = 'files/$fileName';
     MYFirebasebaseStorage.uploadFile(destionation, file!);
-    setState(() {
-    });
+    setState(() {});
   }
 
   // Future uploadFile() async {

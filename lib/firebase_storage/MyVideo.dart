@@ -1,91 +1,91 @@
-// import 'package:chewie/chewie.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_database/firebase_database.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:flutter/material.dart';
-// import 'package:image_picker/image_picker.dart';
-// import 'package:uuid/uuid.dart';
-// import 'package:video_player/video_player.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:video_player/video_player.dart';
 
+import '../home.dart';
 
-// class VideoWidget extends StatefulWidget {
+class videoPlayer extends StatefulWidget {
+  const videoPlayer({Key? key}) : super(key: key);
 
-//   final bool play=true;
-//   final String url="gs://islamtube-36d80.appspot.com/files/10000000_355233925636951_5013139508595553250_n.mp4";
+  @override
+  State<videoPlayer> createState() => _videoPlayerState();
+}
 
-//   // const VideoWidget({Key? key, required this.url, required this.play})
-//   //     : super(key: key);
+class _videoPlayerState extends State<videoPlayer> {
+  String dataSource ="https://firebasestorage.googleapis.com/v0/b/islamtube-36d80.appspot.com/o/files%2Fpexels-sam-lion-5730885.mp4?alt=media&token=6deae608-3bd1-41de-8f90-cd8bc53c17c9";
+      
+  VideoPlayerController? _controller;
 
-//   @override
-//   _VideoWidgetState createState() => _VideoWidgetState();
-// }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = VideoPlayerController.network(dataSource)
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        child: home(),
+        preferredSize: Size.fromHeight(60),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _controller!.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: _controller!.value.aspectRatio,
+                    child: VideoPlayer(_controller!),
+                  )
+                : Container(),
+            //progress
 
-// class _VideoWidgetState extends State<VideoWidget> {
-//   late VideoPlayerController videoPlayerController ;
-//   late Future<void> _initializeVideoPlayerFuture;
+            VideoProgressIndicator(
+              _controller!,
+              allowScrubbing: true,
+              padding: const EdgeInsets.all(1),
+            ),
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     videoPlayerController = new VideoPlayerController.network(widget.url);
-//     _initializeVideoPlayerFuture = videoPlayerController.initialize().then((_) {
-//       setState(() {});
-//     });
-//   }
-//   @override
-//   void dispose() {
-//     videoPlayerController.dispose();
-//     //    widget.videoPlayerController.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder(
-//       future: _initializeVideoPlayerFuture,
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.done) {
-//           return new Container(
-//             child: Card(
-//               key: new PageStorageKey(widget.url),
-//               elevation: 5.0,
-//               child: Column(
-//                 children: <Widget>[
-//                   Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Chewie(
-//                       key: new PageStorageKey(widget.url),
-//                       controller: ChewieController(
-//                         videoPlayerController: videoPlayerController,
-//                         aspectRatio: 3 / 2,
-//                         autoInitialize: true,
-//                         looping: false,
-//                         autoPlay: false,
-//                         // Errors can occur for example when trying to play a video
-//                         // from a non-existent URL
-//                         errorBuilder: (context, errorMessage) {
-//                           return Center(
-//                             child: Text(
-//                               errorMessage,
-//                               style: TextStyle(color: Colors.white),
-//                             ),
-//                           );
-//                         },
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           );
-//         }
-//         else {
-//           return Center(
-//             child: CircularProgressIndicator(),);
-//         }
-//       },
-//     );
-//   }
-// }
-
+            //create button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.skip_previous),
+                  color: Colors.black,
+                ),
+                IconButton(
+                  onPressed: () {
+                    _controller!.value.isPlaying
+                        ? _controller!.pause()
+                        : _controller!.play();
+                      setState(() {
+                        _controller!.value.isPlaying
+                      ? Icons.pause
+                      : Icons.play_arrow;
+                      });
+                  },
+                  icon: Icon(_controller!.value.isPlaying
+                      ? Icons.pause
+                      : Icons.play_arrow),
+                  color: Colors.black,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.skip_next),
+                  color: Colors.black,
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
