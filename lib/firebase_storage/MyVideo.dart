@@ -14,7 +14,7 @@ class videoPlayer extends StatefulWidget {
 
 class _videoPlayerState extends State<videoPlayer> {
   
-  String dataSource ="https://firebasestorage.googleapis.com/v0/b/islamtube-36d80.appspot.com/o/files%2Fpexels-sam-lion-5730885.mp4?alt=media&token=6deae608-3bd1-41de-8f90-cd8bc53c17c9";
+  String dataSource ="https://firebasestorage.googleapis.com/v0/b/islamtube-36d80.appspot.com/o/files%2FMosque%20-%2040704.mp4?alt=media&token=e9cb0f5b-56d5-4ff5-94fb-b7ae08a19e23";
       
   VideoPlayerController? _controller;
 
@@ -63,10 +63,12 @@ class _videoPlayerState extends State<videoPlayer> {
                 ),
                 IconButton(
                   onPressed: () {
-                    _controller!.value.isPlaying
+                    
+                      setState(() {
+                        _controller!.value.isPlaying
                         ? _controller!.pause()
                         : _controller!.play();
-                      setState(() {
+                      
                         _controller!.value.isPlaying
                       ? Icons.pause
                       : Icons.play_arrow;

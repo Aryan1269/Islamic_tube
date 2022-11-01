@@ -68,7 +68,10 @@ class _Home_screenState extends State<Home_screen> {
                       text: 'LIBRARY'),
                 ],
               ),
-              body: TabBarView(children: [
+              body: TabBarView(
+                 physics: NeverScrollableScrollPhysics(),
+        
+                children: [
                 // mainHome(),
                 videoPlayer(),
 
@@ -98,7 +101,7 @@ class _Home_screenState extends State<Home_screen> {
               const Text('Create'),
               pickFile(context),
               ElevatedButton(
-                child: const Text('Close BottomSheet'),
+                child: const Text('Close'),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
@@ -119,8 +122,8 @@ class _Home_screenState extends State<Home_screen> {
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(
-        // type: FileType.custom,
-        // allowedExtensions: ['mp3', 'mp4'],
+        type: FileType.custom,
+        allowedExtensions: ['mp3', 'mp4'],
         allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
