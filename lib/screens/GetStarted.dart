@@ -73,6 +73,7 @@ class _GetStartedState extends State<GetStarted> {
                 ),
                 textAlign: TextAlign.center,
               ),
+              //calling quotes
               for (var item in quotes) buildTitle(item),
               SizedBox(
                 height: MediaQuery.of(context).size.height*0.02,

@@ -141,14 +141,7 @@ class _registerState extends State<register> {
                                   codeAutoRetrievalTimeout: (e) {
                                     print(e);
 
-                                    Fluttertoast.showToast(
-                                        msg: "$e",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.CENTER,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
+                                    
                                   });
                             },
                             child: Text(
@@ -211,14 +204,7 @@ class _registerState extends State<register> {
                               await auth2.signInWithCredential(credential);
                               Navigator.pushReplacementNamed(context, "/home");
                             } catch (e) {
-                              Fluttertoast.showToast(
-                                  msg: "error${e}",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 5,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
+                              print(e);
                             }
                           } else {
                             Fluttertoast.showToast(

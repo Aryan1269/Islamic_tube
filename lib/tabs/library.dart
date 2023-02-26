@@ -18,7 +18,7 @@ class LIBRARYs extends StatelessWidget {
               // elevation: 50,
               color: Colors.grey,
               child: Container(
-              child: Text("Aryan"),
+              child: Text("History"),
               width: 200,
               height: 100,
               ),
