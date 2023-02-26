@@ -11,8 +11,8 @@ class register extends StatefulWidget {
 }
 
 class _registerState extends State<register> {
+  
   final _formKey = GlobalKey<FormState>(); //added
-
   final auth = FirebaseAuth.instance;
   final auth2 = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
@@ -140,8 +140,6 @@ class _registerState extends State<register> {
                                   },
                                   codeAutoRetrievalTimeout: (e) {
                                     print(e);
-
-                                    
                                   });
                             },
                             child: Text(
@@ -193,6 +191,7 @@ class _registerState extends State<register> {
                       height: MediaQuery.of(context).size.height * 0.08,
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: ElevatedButton(
+                        //login code
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final credential = PhoneAuthProvider.credential(
